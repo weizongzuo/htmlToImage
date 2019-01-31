@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>利用html2canvas.js生成图片</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        padding: 0;
+        border: 0;
+        margin: 0;
+      }
+      html,
+      body {
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+        overflow-y: auto;
+        display: -webkit-flex;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .wrap {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background-color: aqua;
+      }
+      .text,
+      .detail {
+        text-align: center;
+        margin: 20px 0;
+        background-color: blueviolet;
+      }
+      .image {
+        margin-top: 50px;
+        width: 75%;
+        height: 75%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap" id="capture">
+      <div class="text">HTML TO IMAGE测试</div>
+      <div class="detail">点击即可生成图片</div>
+    </div>
+    <img class="image" alt="生成的图片" />
+    <script src="./html2canvas.js"></script>
+    <script>
+      var capture = document.querySelector("#capture");
+      var _img = document.querySelector(".image");
+      capture.onclick = function() {
+        html2canvas(capture).then(canvas => {
+          var url = canvas.toDataURL("image/png", 1);
+          _img.setAttribute("src", url);
+        });
+      };
+    </script>
+  </body>
+</html>
